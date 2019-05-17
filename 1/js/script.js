@@ -27,4 +27,6 @@ let AB = Math.sqrt((x2-x1)*(x2-x1) + (y2-y1)*(y2-y1) + (z2-z1)*(z2-z1) ),
  BC = Math.sqrt((x3-x2)*(x3-x2) + (y3-y2)*(y3-y2) + (z3-z2)*(z3-z2) ),
  AC = Math.sqrt((x3-x1)*(x3-x1) + (y3-y1)*(y3-y1) + (z3-z1)*(z3-z1) );
 
-(BC*BC === AC*AC+AB*AB)? console.log("прямоугольный") : console.log("не прямоугольный");
+let eq = (BC>AB)? (BC>AC)? true : false : false;
+
+(eq===true)? (BC*BC === AC*AC+AB*AB)? console.log("прямоугольный") : console.log("не прямоугольный") : console.log("ss");;
