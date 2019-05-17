@@ -1,6 +1,8 @@
 console.log("Task 1");
-let space_left = 1000-15*25;
-console.log(space_left);
+let space_left = 10*100, gr=15*25;
+let multiplier = space_left/gr - space_left%gr;
+
+console.log(space_left-gr*multiplier);
 
 console.log("Task 2");
 space_left = 15*100 - 600;
