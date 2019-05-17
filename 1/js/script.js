@@ -31,4 +31,4 @@ let AB = Math.sqrt((x2-x1)*(x2-x1) + (y2-y1)*(y2-y1) + (z2-z1)*(z2-z1) ),
 
 let eq = (BC>AB)? (BC>AC)? true : false : false;
 
-(eq===true)? (BC*BC === AC*AC+AB*AB)? console.log("прямоугольный") : console.log("не прямоугольный") : console.log("ss");;
+(eq===true)? (BC*BC === AC*AC+AB*AB)? console.log("прямоугольный") : console.log("не прямоугольный") : console.log("не прямоугольный");;
