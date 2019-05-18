@@ -17,7 +17,6 @@ if (month < 1 || month > 12 || isNaN(month)) {
   }
 }
 
-
 console.log("Task 2");
 let L = 15.5;
 let prefix = parseInt(prompt(`Enter prefix for L=${L} \n 1 = dm, 2 = km, 3 = m, 4 = mm, 5 = cm`));
