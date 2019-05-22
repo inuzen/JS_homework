@@ -59,6 +59,7 @@ console.log(arr);
 
 console.log("Task 4");
 
+console.time("Bruteforce");
 let count = 0,
   tmp;
 let tickets = [];
@@ -78,4 +79,30 @@ for (let i = 0; i < tickets.length; i++) {
     count++;
   }
 }
+console.timeEnd("Bruteforce");
+console.log("Всего счастливых билетиков: " + count);
+
+//ИЛИ
+count = 0;
+console.time("division");
+for (let i = 1; i < 1000000; i++) {
+  let num = i;
+  let sum1=0, sum2=0;
+    for(let i=0;i<3;i++)
+    {
+        sum1 += num % 10;
+        num = Math.floor(num/10);
+        // console.log(sum1, num);
+    }
+    for(let i=0;i<3;i++)
+    {
+        sum2 += num % 10;
+        num = Math.floor(num/10);
+        // console.log(sum2, num);
+    }
+    if (sum1===sum2) {
+      count++;
+    }
+}
+console.timeEnd("division");
 console.log("Всего счастливых билетиков: " + count);
