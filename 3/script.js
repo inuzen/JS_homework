@@ -4,11 +4,11 @@ let A = [12, 4, 3, 10, 1, 20],
   B = [-3, -7, -100, -33];
 
 let C = B.concat(A);
-console.log(C);
+console.log("Объединенный массив через concat: "+C);
 //ИЛИ
 C = B;
 A.forEach(d => C.push(d));
-console.log(C);
+console.log("Объединенный массив через push: "+C);
 
 console.log("Task 2");
 // var area = [ null, null, null, null, null, null, null, null, null ]
@@ -36,24 +36,24 @@ for (let i = 0; i < area.length; i += 3) {
 }
 html += "</tbody></table>";
 document.body.innerHTML = html;
-
+console.log("Результат на верстке");
 
 console.log("Task 3 ");
 
 let arr = [12, 4, 3, 10, 1, 20];
-console.log(arr);
+console.log("Начальный массив: "+arr);
 let min = Math.min(...arr),
   max = Math.max(...arr);
 arr.splice(arr.indexOf(min), 1);
 arr.splice(arr.indexOf(max), 1);
-console.log(arr);
+console.log("Удаление максимального и минимального через splice: "+arr);
 //ИЛИ
 arr.sort(function(a, b) {
   return a - b;
 });
 arr.shift();
 arr.pop();
-console.log(arr);
+console.log("Удаление максимального и минимального через sort:" +arr);
 
 
 
