@@ -14,7 +14,6 @@ function compareArr(arr1, arr2) {
   else
     console.log("Массивы равны");
   return;
-
 }
 
 let a = [1, 2, 3, 4, 5],
