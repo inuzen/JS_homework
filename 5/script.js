@@ -1,9 +1,11 @@
 console.log("Task 1 - Compare Arrays");
 
 function compareArr(arr1, arr2) {
+  if(Array.isArray(arr1) || Array.isArray(arr2))
+    return console.log("проверьте введенные данные");
   if (arr1.length !== arr2.length)
     return console.log('Массивы не равны');
-    for (let i = 0; i < arr1.length; i++)
+  for (let i = 0; i < arr1.length; i++)
       if (arr1[i]!==arr2[i])
         return console.log('Массивы не равны');
 
@@ -75,18 +77,17 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-
 const vow = "aeiou";
 const cons = "bcdfghjklmnpqrstvwxyz";
-const randomVowel = () => vow[getRandomInt(0, vow.length)];
-const randomConsonant = () => cons[getRandomInt(0, cons.length)];
+const randomVowel = () => vow[getRandomInt(0, vow.length-1)];
+const randomConsonant = () => cons[getRandomInt(0, cons.length-1)];
 
 function create_word() {
   let word = "";
   let word_len = getRandomInt(3, 6);
   console.log("Длина слова: " + word_len);
 
-  let start = Math.round(Math.random());
+  let start = getRandomInt(0,1);
   const getNextLetter = (char) => (char) ? randomConsonant() : randomVowel();
 
   for (let i = 0; i < word_len; i++) {
