@@ -2,7 +2,7 @@ console.log("Task 1 - Compare Arrays");
 
 function compareArr(arr1, arr2) {
   if (arr1.length !== arr2.length)
-    console.log('Массивы не равны');
+    return console.log('Массивы не равны');
 
   let tmp = true;
   arr1.forEach((elem, index) => {
