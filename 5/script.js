@@ -28,12 +28,9 @@ console.log("Task 2 - Range funct");
 
 function range(start, end, step = 1) {
   let arr = [];
-  for (let i = start; i < end; i += step)
+  for (let i = start; i <= end; i += step)
     arr.push(i)
 
-  arr.push(end);
-  //В задании сказано "включая начальное и конечное". Так я наверняка включаю конечное.
-  //Если это не нужно, то ее можно убрать, а в цикле поставить i <= end
   return arr;
 }
 
