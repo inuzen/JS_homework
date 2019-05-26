@@ -3,25 +3,21 @@ console.log("Task 1 - Compare Arrays");
 function compareArr(arr1, arr2) {
   if (arr1.length !== arr2.length)
     return console.log('Массивы не равны');
+    for (let i = 0; i < arr1.length; i++)
+      if (arr1[i]!==arr2[i])
+        return console.log('Массивы не равны');
 
-  let tmp = true;
-  arr1.forEach((elem, index) => {
-    if (elem !== arr2[index])
-      tmp = false;
-  });
-  if (!tmp)
-    console.log('Массивы не равны');
-  else
-    console.log("Массивы равны");
-  return;
+  return console.log("Массивы равны");
 }
 
 let a = [1, 2, 3, 4, 5],
   b = [1, 2, 3, 4, 5],
   c = [2, 3, 4, 5, 6];
+  d = [2, 3, 4, 5];
 
 compareArr(a, b);
 compareArr(a, c);
+compareArr(c, d);
 
 console.log("Task 2 - Range funct");
 
