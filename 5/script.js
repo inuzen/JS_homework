@@ -1,9 +1,9 @@
 console.log("Task 1 - Compare Arrays");
 
 function compareArr(arr1, arr2) {
-  if (arr1.length !== arr2.length) {
+  if (arr1.length !== arr2.length)
+    console.log('Массивы не равны');
 
-  }
   let tmp = true;
   arr1.forEach((elem, index) => {
     if (elem !== arr2[index])
@@ -28,12 +28,9 @@ console.log("Task 2 - Range funct");
 
 function range(start, end, step = 1) {
   let arr = [];
-  for (let i = start; i < end; i += step)
+  for (let i = start; i <= end; i += step)
     arr.push(i)
 
-  arr.push(end);
-  //В задании сказано "включая начальное и конечное". Так я наверняка включаю конечное.
-  //Если это не нужно, то ее можно убрать, а в цикле поставить i <= end
   return arr;
 }
 
@@ -95,9 +92,9 @@ function create_word() {
   console.log("Длина слова: " + word_len);
 
   let start = Math.round(Math.random());
-  const getNextLetter = (char) => (char)? randomConsonant() : randomVowel();
+  const getNextLetter = (char) => (char) ? randomConsonant() : randomVowel();
 
-  for(let i = 0; i< word_len;i++){
+  for (let i = 0; i < word_len; i++) {
     word += getNextLetter(start);
     start = !start;
   }
