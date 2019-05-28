@@ -2,14 +2,14 @@ console.log("Task 1 - Compare Arrays");
 
 function compareArr(arr1, arr2) {
   if(Array.isArray(arr1) || Array.isArray(arr2))
-    return console.log("проверьте введенные данные");
+    return false
   if (arr1.length !== arr2.length)
-    return console.log('Массивы не равны');
+    return false;
   for (let i = 0; i < arr1.length; i++)
       if (arr1[i]!==arr2[i])
-        return console.log('Массивы не равны');
+        return false;
 
-  return console.log("Массивы равны");
+  return true;
 }
 
 let a = [1, 2, 3, 4, 5],
