@@ -48,7 +48,7 @@ let student = {
   lastname: "Johnson",
   hobby: ["footbal", "beer", "TV"],
   uni: "Princeton",
-  print: function () {
+  print: function() {
     console.log(`Student info:
     Name: ${this.name};
     Lastname: ${this.lastname};
@@ -61,3 +61,38 @@ let student = {
 student.print();
 
 console.log("Task 4");
+
+
+function factorial(n) {
+  if (n < 0) return;
+  if (n === 0) return 1;
+  return n * factorial(n - 1);
+}
+let n = 10;
+console.log(`${n}! = ${factorial(n)}`);
+
+console.log("Task 4");
+let arr = [{
+    'price': 10,
+    'count': 2
+  }, {
+    'price': 5,
+    'count': 5
+  },
+
+  {
+    'price': 8,
+    'count': 5
+  }, {
+    'price': 12,
+    'count': 4
+  }, {
+    'price': 8,
+    'count': 4
+  },
+];
+
+arr.sort(function(a,b){
+  return a.price - b.price;
+});
+console.log(arr);
