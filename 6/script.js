@@ -80,7 +80,7 @@ function factorial(n) {
 let n = 10;
 console.log(`${n}! = ${factorial(n)}`);
 
-console.log("Task 4");
+console.log("Task 5");
 let arr = [{
     'price': 10,
     'count': 2
