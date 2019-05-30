@@ -23,13 +23,16 @@ console.log(foo(a, 'count', 10));
 console.log("Task 2");
 
 function generateRandomArr() {
+  let res = [];
+
   function getArr() {
     let max_val = 100; //value included
-    let res = [];
-    while (res.length < max_val) {
+    let new_length = res.length + 1;
+    while (res.length < new_length) {
       cur_val = Math.floor(Math.random() * max_val) + 1;
       if (!res.includes(cur_val)) {
         res.push(cur_val);
+        break;
       }
     }
     return res;
@@ -38,7 +41,13 @@ function generateRandomArr() {
 }
 
 let getAr = generateRandomArr();
+
+for (var i = 0; i < 99; i++) {
+  getAr();
+}
 console.log(getAr());
+
+
 
 
 console.log("Task 3");
@@ -54,7 +63,7 @@ let student = {
     Lastname: ${this.lastname};
     Hobbies: ${this.hobby};
     Education: ${this.uni}`);
-    return;
+
   }
 };
 
@@ -92,7 +101,7 @@ let arr = [{
   },
 ];
 
-arr.sort(function(a,b){
+arr.sort(function(a, b) {
   return a.price - b.price;
 });
 console.log(arr);
