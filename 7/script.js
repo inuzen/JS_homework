@@ -87,13 +87,33 @@ let lights = street_light.querySelectorAll(".light");
 
 function switcher (){
   let iterator = 0;
+  let up_down = true; //true if down
   function next() {
     lights.forEach(l => l.style.cssText= "background-color:gray");
     lights[iterator].style.cssText = `background-color: ${colorArr[iterator]}`;
-    iterator++;
-    if (iterator===3) iterator = 0;
+    (up_down)? iterator++ : iterator--;
+    if (iterator===2 || iterator===0) up_down = !up_down;
   }
   return next;
 }
 let sw = switcher();
 setInterval(sw, 2000);
+
+
+
+// Создать функцию которая выводит в html количество дней,
+// часов и минут до нового года и обновляет значения каждую минуту.
+ // Датой наступления нового года считается 1 января. Функция выводит в html строку вида: "14 дней 21 час 46 минут".
+ //  Нужно реализовать корректные окончания слов, например: 1 день, 2 дня, 5 дней.
+// Функция должна корректно работать при запуске в любом году, т. е. грядущий год должен вычисляться программно.
+// console.log("Task 4");
+// let curDate = new Date();
+// let new_year = 'January 1 '+(curDate.getFullYear() + 1) + " 00:00:00";
+// let currentTime = curDate.getDate();
+// let timeMS = Date.now();
+//
+// let time_left = Date.parse(new_year) - Date.parse(curDate);
+// let days = Math.floor(time_left/(1000*60*60*24));
+// let hours = Math.floor((time_left/(1000*60*60))%24);
+// let minutes = Math.floor((time_left/(1000/60))%60);
+// console.log(`${days} days ${hours} hours ${minutes} minutes`);
