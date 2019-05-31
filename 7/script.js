@@ -25,20 +25,20 @@ span3.style.color = "green";
 function displayTime() {
 
   let time = initTime();
-  timer.innerHTML = "";
+  // timer.innerHTML = "";
   span1.innerHTML = "";
   span2.innerHTML = "";
   span3.innerHTML = "";
   span1.appendChild(document.createTextNode(time.hours));
   span2.appendChild(document.createTextNode(time.minutes));
   span3.appendChild(document.createTextNode(time.seconds));
-  timer.appendChild(span1);
-  timer.appendChild(document.createTextNode(":"));
-  timer.appendChild(span2);
-  timer.appendChild(document.createTextNode(":"));
-  timer.appendChild(span3);
-}
 
+}
+timer.appendChild(span1);
+timer.appendChild(document.createTextNode(":"));
+timer.appendChild(span2);
+timer.appendChild(document.createTextNode(":"));
+timer.appendChild(span3);
 setInterval(displayTime, 1000);
 
 
@@ -115,5 +115,5 @@ setInterval(sw, 2000);
 // let time_left = Date.parse(new_year) - Date.parse(curDate);
 // let days = Math.floor(time_left/(1000*60*60*24));
 // let hours = Math.floor((time_left/(1000*60*60))%24);
-// let minutes = Math.floor((time_left/(1000/60))%60);
+// let minutes = Math.floor( (time_left/1000/60) % 60 );
 // console.log(`${days} days ${hours} hours ${minutes} minutes`);
