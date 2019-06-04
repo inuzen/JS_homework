@@ -9,6 +9,7 @@ function initTime () {
     year: formatTime(dt.getFullYear())
   }
   return time.day + "-" + time.month + "-" + time.year;
+  //return dt.toLocaleString('ru-RU')
 }
 
 console.log("Task 1");
@@ -20,7 +21,7 @@ let box = document.querySelector(".task1-container");
 
 box.addEventListener("click", function(e){
   if (e.target.classList.contains("box"))
-    e.target.classList.toggle("active");  
+    e.target.classList.toggle("active");
 });
 
 
