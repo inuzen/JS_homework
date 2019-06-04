@@ -19,7 +19,8 @@ console.log("Task 1");
 let box = document.querySelector(".task1-container");
 
 box.addEventListener("click", function(e){
-  e.target.classList.toggle("active");
+  if (e.target.classList.contains("box"))
+    e.target.classList.toggle("active");  
 });
 
 
@@ -133,7 +134,7 @@ console.log("Task 5");
 let nav_bar = document.querySelector(".nav-wrapper");
 
 nav_bar.addEventListener("click", function(e){
-  e.preventDefault;
+  e.preventDefault();
   let cls = e.target.dataset.link;
   console.log(cls);
   let tabs = document.querySelectorAll(".tab");
