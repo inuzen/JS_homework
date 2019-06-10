@@ -4,7 +4,7 @@ function Human (name, age, gender, hobbies){
   this.name = name? name : "Undefined";
   this.age = (!age.isNaN&&age>0)? age : 0;
   this.gender = gender;
-  this.hobbies = Array.isArray(hobbies)? hobbies.toString().split(",").join(", ") : hobbies;
+  this.hobbies = Array.isArray(hobbies)? hobbies.join(", ") : hobbies;
 
   this.toString =function () {
     return `Особь человека. Зовут ${this.name}, возраст ${this.age}, пол: ${this.gender}. Интересы: ${this.hobbies} `
