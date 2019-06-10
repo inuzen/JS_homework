@@ -11,6 +11,7 @@ function Human (name, age, gender, hobbies){
   Human.prototype.toString =function () {
     return `Особь человека. Зовут ${this.name}, возраст ${this.age}, пол: ${this.gender}. Интересы: ${this.hobbies} `
 }
+
 function Student(name, age, gender, hobbies, uni) {
   Human.call(this,name, age, gender, hobbies);
   this.uni = uni;
@@ -21,7 +22,7 @@ Student.prototype.toString = function () {
 }
 
 
-Student.prototype.__proto__ = Human.prototype;//Для чего мы это делаем? Оно и без этой строчки работает
+Student.prototype.__proto__ = Human.prototype;
 
 let john = new Human("john", 12, "male", ["footbal", "cats"]);
 console.log(""+john);
