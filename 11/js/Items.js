@@ -7,7 +7,7 @@ function Item (){
 }
 
 Item.prototype.create=function(name,price){
-  if (name && !price.isNaN&& price>=0) {
+  if (name && Number.isFinite(price)&& price>=0) {
     this.name = name;
     this.price = price;
   }

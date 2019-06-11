@@ -2,7 +2,7 @@ console.log("Task 2");
 
 function Human (name, age, gender, hobbies){
   this.name = name? name : "Undefined";
-  this.age = (!age.isNaN&&age>0)? age : 0;
+  this.age = (Number.isInteger(age)&&age>0)? age : 0;
   this.gender = gender;
   this.hobbies = Array.isArray(hobbies)? hobbies.join(", ") : hobbies;
 
