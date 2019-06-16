@@ -1,15 +1,14 @@
 let color = {
-  colorArr: ["yellow", "red", "blue", "green", "orange"],
+  colorArr: ["coral", "#21b4ac", "lightgreen", "orange", "purple"],
+  // colorArr: ["rgba(108, 37, 61, 1)", "rgba(108, 60, 102, 1)", "rgba(108, 130, 165, 1)", "rgba(155, 91, 193, 1)", "rgba(187, 58, 193, 1)"],
   getColor: function() {
-    let rng = Math.floor(Math.random() * (this.colorArr.length - 1));
+    let rng = Math.floor(Math.random() * (this.colorArr.length));
     return this.colorArr[rng];
   }
 };
 
-//let count = 3;
-var boxCounter = 1;
 let SCORE = 0;
-let counter = document.querySelector(".counter");
+let counter = $(".counter");
 
 let elementObj = {
   first: "",
@@ -22,9 +21,7 @@ let elementObj = {
     } else {
       this.last = el;
       this.isFirst = !this.isFirst;
-
-        swapColors(this.first, this.last);
-
+      swapColors(this.first, this.last);
       findMatches();
       this.first = "";
       this.last = "";
@@ -41,7 +38,9 @@ function swapColors(el1, el2) {
     el2.style.backgroundColor = el1.style.backgroundColor;
     el1.style.backgroundColor = temp;
 
-  } else console.log("wrong move");
+  } else $(el1).effect("shake", {
+    times: 1
+  }, 200);
 
 
   el1.classList.remove("selected");
@@ -57,7 +56,7 @@ function Storage() {
     this.currentColor = color;
   }
   this.checkColor = function(box, arr) {
-    if (this.currentColor === box.color) {
+    if (this.currentColor === box.color && this.currentColor !== "grey") {
       this.counter++;
       if (!arr.includes(box.box))
         arr.push(box.box);
@@ -68,7 +67,7 @@ function Storage() {
       arr = [];
     }
     this.currentColor = box.color;
-    console.log("Original Array: ", arr);
+    // console.log("Original Array: ", arr);
     return arr;
   }
   this.getStreak = () => this.streak;
@@ -79,6 +78,7 @@ function findMatches() {
   let colArr = [],
     rowArr = [];
   let boxArr = [];
+  let greyArr = [];
 
   for (let box of boxes) {
     boxArr.push({
@@ -90,7 +90,7 @@ function findMatches() {
   }
   //check rows
   for (let row = 0; row < N; row++) {
-    console.log("Row number " + row);
+    // console.log("Row number " + row);
     let storage = new Storage();
 
     for (let b of boxArr) {
@@ -103,8 +103,23 @@ function findMatches() {
           rowArr.push(b.box);
       }
     }
-    rowArr=[];
-    console.log("Rows ", storage.getStreak());
+    rowArr = [];
+
+    greyArr = storage.getStreak();
+    if (greyArr !== undefined && greyArr.length > 0) {
+      SCORE += greyArr.length;
+      for (let b of greyArr) {
+        $(b).transfer({
+          to: $("h2"),
+          duration: 500
+        }, () => {
+          counter.text(SCORE);
+        });
+        b.style.backgroundColor = "grey";
+      }
+      greyArr = [];
+    }
+
   }
   //check columns
   for (let col = 0; col < N; col++) {
@@ -120,8 +135,22 @@ function findMatches() {
           colArr.push(b.box);
       }
     }
-    colArr=[];
-    console.log("Columns ", storage.getStreak());
+    colArr = [];
+    greyArr = storage.getStreak();
+    if (greyArr !== undefined && greyArr.length > 0) {
+      SCORE += greyArr.length;
+      for (let b of greyArr) {
+        $(b).transfer({
+          to: $("h2"),
+          duration: 500
+        }, () => {
+          counter.text(SCORE);
+        });
+        b.style.backgroundColor = "grey";
+      }
+      greyArr = [];
+    }
+
   }
 
 
@@ -135,13 +164,9 @@ function createBox(container, column, row) {
   card.classList.remove("selected");
   card.dataset.col = column;
   card.dataset.row = row;
-  boxCounter++;
-  let counter = document.querySelector(".counter");
   card.onclick = function() {
-
     this.classList.toggle("selected");
-
-    elementObj.set(this)
+    elementObj.set(this);
 
   }
   container.appendChild(card);
@@ -159,5 +184,5 @@ function create_field(n) {
     box.appendChild(container);
   }
 }
-const N = 4;
+const N = 5;
 create_field(N);
