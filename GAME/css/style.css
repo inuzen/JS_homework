@@ -1,32 +1,33 @@
-*{
+* {
   box-sizing: border-box;
-
 }
 
-.card{
-  opacity: 1;
-  margin: 15px;
+.card-container {
+  position: relative;
   width: 100px;
   height: 100px;
-  /* border: ""; */
-  border-radius: 5px;
-
-  text-align: center;
-  line-height: 100px;
-  /* box-shadow: 0px 0px 3px 0px black; */
-  transition: background-color 0.5s;
-
+  margin: 15px;
 }
 
+.card {
+  position: absolute;
+  opacity: 1;
+  width: 100px;
+  height: 100px;
+  border-radius: 5px;
+  line-height: 100px;
+  transition: background-color 1s;
+}
 
-.task4-container{
+.task4-container {
   margin: 50px auto;
   text-align: center;
   display: flex;
   flex-flow: column wrap;
   align-items: center;
 }
-.field{
+
+.field {
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
@@ -43,17 +44,16 @@
   order: 1;
 }
 
-.selected{
+.selected {
   border: 1px black solid;
-
-  box-shadow: 0 0 5px 0px rgb(0,0,0);
+  box-shadow: 0 0 5px 0px rgb(0, 0, 0);
 }
 
-.fade{
+.fade {
   opacity: 0;
-
 }
 
 .ui-effects-transfer {
   border: 1px dotted black;
+  opacity: 0.4;
 }
