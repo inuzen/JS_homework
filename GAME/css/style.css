@@ -18,7 +18,7 @@
   height: 100px;
   border-radius: 5px;
   line-height: 100px;
-  transition: background-color 1s;
+  transition: background-color 0.4s;
 }
 
 .task4-container {

@@ -95,11 +95,11 @@ function animateMove(el1, el2, onlyRow){
   let anim2={}
   anim2[ref] = ( direction ? "+=" : "-=" )+distance;
 
-  e2.animate(anim1, 250, "easeInBack")
-    .animate(anim2, 250, "easeOutBack");
+  e2.animate(anim1, 200, "easeInCirc")
+    .animate(anim2, 200, "easeOutCirc");
 
-  e1.animate(anim2, 250,"easeInBack")
-    .animate(anim1, 250, "easeOutBack");
+  e1.animate(anim2, 200,"easeInCirc")
+    .animate(anim1, 200, "easeOutCirc");
 }
 
 function Storage() {
@@ -219,21 +219,21 @@ function afterMatch (greyArr){
   if (greyArr !== undefined && greyArr.length > 0) {
     SCORE += greyArr.length;
     for (let b of greyArr) {
+      let $b = $(b);
        // console.log(b);
-      $(b).transfer({
+      $b.transfer({
         to: $(counter),
         bColor: b.style.backgroundColor,
         duration: 500
       }, () => {
         counter.text(SCORE);
       });
-      $(b).stop(false,true);
+      $b.stop(false,true);
+      $b.animate({opacity: 0},{duration:400}, function(){
+      });
+      $b.css( "background-color", color.getColor());
 
-      // $(b).addClass("fade");
-      // $(b).toggle("puff");
-      $(b).css( "background-color", color.getColor());
-      // $(b).removeClass("fade");
-      // $(b).toggle("puff");
+      $b.animate({opacity:1},{duration:400});
     }
   }
   tm.addTime(3);
