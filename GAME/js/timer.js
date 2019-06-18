@@ -1,16 +1,21 @@
  ;
 
 function Timer () {
-  let duration= 5;
-  this.add = function(time){
-    duration+=time;
-    console.log(duration);
-  }
+  let duration;
+  let interval;
+  this.addTime = function(time){duration += time;};
+  this.stopTime = function(){
+    clearInterval(interval);
+    for (box of boxes()){
+      box.style.backgroundColor = "grey";
+    }
+  };
   this.startTimer=function() {
+    duration = 30;
     let minutes, seconds;
 
-  let interval =  setInterval(function () {
-    console.log(duration);
+  interval =  setInterval(function () {
+
         minutes = parseInt(duration / 60, 10)
         seconds = parseInt(duration % 60, 10);
 
@@ -21,7 +26,7 @@ function Timer () {
 
         if (--duration < 0) {
           clearInterval(interval);
-          for (box of boxes){
+          for (box of boxes()){
             box.style.backgroundColor = "grey";
           }
         }

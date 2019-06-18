@@ -1,16 +1,25 @@
 let color = {
-  colorArr: ["coral", "#21b4ac", "lightgreen", "orange", "purple"],
+  colorArr: ["#ff7f50", "#21b4ac", "#90ee90", "#ffa500", "#800080"],
   getColor: function() {
-    let rng = Math.floor(Math.random() * (this.colorArr.length));
-
+    let rng = Math.floor(Math.random() *5);
+    // console.log(this.colorArr[rng]);
     return this.colorArr[rng];
   }
 };
 
 let SCORE = 0;
 let counter = $(".counter");
+let boxes = () => document.querySelectorAll(".card");
+let tm=new Timer();
 
-
+$("#ng-btn").click(function () {
+  tm.stopTime();
+  counter.text(SCORE=0);
+  for (box of boxes()){
+    box.style.backgroundColor = color.getColor();
+  }
+  tm.startTimer();
+});
 
 let elementObj = {
   first: "",
@@ -24,7 +33,7 @@ let elementObj = {
       this.last = el;
       this.isFirst = !this.isFirst;
       swapColors(this.first, this.last);
-      // findMatches();
+
       this.first = "";
       this.last = "";
     }
@@ -34,27 +43,35 @@ let elementObj = {
 function swapColors(el1, el2) {
   let onlyRow = Math.abs(el1.dataset.row - el2.dataset.row) === 1 && Math.abs(el1.dataset.col - el2.dataset.col) === 0;
   let onlyCol = Math.abs(el1.dataset.row - el2.dataset.row) === 0 && Math.abs(el1.dataset.col - el2.dataset.col) === 1;
-
+  let result = false;
   if (onlyRow || onlyCol) {
     let res = findMatches(el1,el2);
-    if(res[0]){
+    if(res){
       let temp = "";
       temp = el2.style.backgroundColor;
       el2.style.backgroundColor = el1.style.backgroundColor;
       el1.style.backgroundColor = temp;
       animateMove(el1, el2, onlyRow);
-      afterMatch(res[1]);
+      afterMatch(res);
 
-    } else $(el1).effect("shake", {
+
+    } else {
+      $(el1).effect("shake", {
       times: 1
     }, 200);
 
-  } else $(el1).effect("shake", {
-    times: 1
-  }, 200);
+  }
+
+} else{
+  $(el1).effect("shake", {
+      times: 1
+    }, 200);
+
+}
 
   el1.classList.remove("selected");
   el2.classList.remove("selected");
+
 }
 
 function animateMove(el1, el2, onlyRow){
@@ -89,35 +106,43 @@ function Storage() {
   let currentColor = "";
   let counter = 1;
 
-  let streak = [];
+  this.streak = [];
+  // this.streak = new Set();
   this.set = function(color) {
     this.currentColor = color;
   }
   this.checkColor = function(box, arr) {
+    console.log(this.currentColor, box.color);
     if (this.currentColor === box.color && this.currentColor !== "grey") {
       this.counter++;
 
       if (!arr.includes(box.box))
         arr.push(box.box);
+        console.log(arr);
       if (arr.length > 2) {
-        this.streak = [...arr];
+        let str = this.streak;
+        str = arr.map(function (val) {
+          if (!str.includes(val))
+            str.push(val);
+        });
+
       }
     } else {
       arr = [];
     }
     this.currentColor = box.color;
-    // console.log("Original Array: ", arr);
     return arr;
   }
   this.getStreak = () => this.streak;
 }
 
+
 function findMatches(el1="",el2="") {
-  let boxes = document.querySelectorAll(".card");
+
 
   let boxArr=[];
   let num = 0;
-  for (let box of boxes) {
+  for (let box of boxes()) {
     boxArr.push({
       row: box.dataset.row,
       col: box.dataset.col,
@@ -126,34 +151,48 @@ function findMatches(el1="",el2="") {
       num: num++
     });
   }
-
-  let color1, color2, el1_col, el2_col, el1_row, el2_row, temp;
+  console.log(el1, el2);
   if(el1&&el2){
+  let color1, color2, el1_col, el2_col, el1_row, el2_row;
      color1 = el1.style.backgroundColor;
      color2 = el2.style.backgroundColor;
      el1_row= parseInt(el1.dataset.row);
      el1_col= parseInt(el1.dataset.col);
      el2_row= parseInt(el2.dataset.row);
      el2_col= parseInt(el2.dataset.col);
-
      boxArr[el2_col*5 + el2_row].color = color1;
      boxArr[el1_col*5 + el1_row].color = color2;
 
   }
 
   //check rows
-  let isRowMatch = checkAisles(boxArr, ["row", "col"]);
+  let rowMatch = checkAisles(boxArr, ["row", "col"]);
   //checkColumns
-  let isColMatch = checkAisles(boxArr, ["col", "row"]);
-  return (isRowMatch||isColMatch)
+  let colMatch = checkAisles(boxArr, ["col", "row"]);
+
+  let res = [];
+  if (rowMatch&&colMatch) {
+    res.push(...rowMatch);
+    res.push(...colMatch);
+
+  }
+  else if (rowMatch) {
+  res.push(...rowMatch);
+  }
+  else if(colMatch){
+    res.push(...colMatch);
+  }
+  else res = false;
+  // console.log(res);
+  return res;
 }
 
 function checkAisles(boxArr, options){
   let rowArr=[];
   let greyArr = [];
 
+  let storage = new Storage();
   for (let iter = 0; iter < N; iter++) {
-    let storage = new Storage();
     for (let b of boxArr) {
 
       if (b[options[0]] == iter && b[options[1]] == 0) {
@@ -161,28 +200,26 @@ function checkAisles(boxArr, options){
       }
       if (b[options[0]] == iter) {
         rowArr = storage.checkColor(b, rowArr);
-
         if (!rowArr.includes(b.box))
           rowArr.push(b.box);
       }
 
     }
     rowArr = [];
-    let tempArr = storage.getStreak();
-    if (tempArr !== undefined && tempArr.length > 0) {
-
-      return [true, tempArr] ;
-    }
-
 
   }
-  return false;
+  let tempArr = storage.getStreak();
+  if (tempArr !== undefined && tempArr.length > 0) {
+    // console.log(tempArr);
+    return tempArr;
+  }else return false;
 }
 
 function afterMatch (greyArr){
   if (greyArr !== undefined && greyArr.length > 0) {
     SCORE += greyArr.length;
     for (let b of greyArr) {
+       // console.log(b);
       $(b).transfer({
         to: $(counter),
         bColor: b.style.backgroundColor,
@@ -190,13 +227,16 @@ function afterMatch (greyArr){
       }, () => {
         counter.text(SCORE);
       });
-      console.log(b);
       $(b).stop(false,true);
-      $(b).toggle("puff");
-      b.style.backgroundColor = color.getColor();
-      $(b).toggle("puff");
+
+      // $(b).addClass("fade");
+      // $(b).toggle("puff");
+      $(b).css( "background-color", color.getColor());
+      // $(b).removeClass("fade");
+      // $(b).toggle("puff");
     }
   }
+  tm.addTime(3);
 }
 
 function createBox(container, column, row) {
@@ -229,6 +269,7 @@ function create_field(n) {
     }
     box.appendChild(container);
   }
+  tm.startTimer();
 
 }
 const N = 5;

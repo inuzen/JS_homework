@@ -1,5 +1,7 @@
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 .card-container {
@@ -50,10 +52,31 @@
 }
 
 .fade {
-  opacity: 0;
+  width: 10px;
+  /* opacity: 0; */
+  transition: width 1s
 }
 
 .ui-effects-transfer {
   border: 1px dotted black;
   opacity: 0.4;
+}
+
+.new-game-btn, .new-game-btn:hover {
+  cursor: pointer;
+  padding: 3px;
+  margin: 10px 0;
+  border: 1px solid lightgreen;
+  border-radius: 5px;
+
+}
+.new-game-btn:active{
+  background-color:#ffebce
+}
+.timer-container {
+  margin: 10px 0;
+}
+
+.timer-container > h4 {
+  display: inline-block;
 }
